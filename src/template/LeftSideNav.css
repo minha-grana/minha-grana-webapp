@@ -1,0 +1,25 @@
+.userView .white-text {
+    color: #605c72 !important;
+    text-shadow: 1px 1px 2px #ffffff;
+    font-weight: 700;
+}
+
+.userView .name {
+    font-size: 26px;
+}
+
+.userView .background img {
+    max-width: 100%;
+}
+
+.userView a {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: black;
+}
+
+a.active-route, 
+a.active-route:hover {
+    background-color: rgba(0,0,0,0.1) !important;
+}

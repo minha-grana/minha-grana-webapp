@@ -1,0 +1,10 @@
+nav {
+    background-color: #6E6A81;
+}
+
+.brand-logo i {
+    margin: 0 !important;
+    padding: 0 15px;
+    cursor: pointer;
+    font-size: 28px !important;
+}
