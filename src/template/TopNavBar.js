@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, Icon, Row } from 'react-materialize';
+import { Navbar, Icon } from 'react-materialize';
 import { NavLink } from 'react-router-dom';
 import './TopNavBar.css';
 

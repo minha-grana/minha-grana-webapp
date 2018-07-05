@@ -1,0 +1,33 @@
+
+/* This is a fix for react materialize navbar (disable mobile) */
+.hide-on-med-and-down {
+  display: block !important;
+}
+#nav-mobile {
+  display: none;
+}
+.button-collapse {
+  display: none;
+}
+/* End of fix */
+
+
+@media (max-width: 992px) {
+  nav .brand-logo {
+    left: 1em;
+  }
+}
+
+.page {
+  padding: 20px;
+}
+
+.page-header {
+  margin: 0;
+  font-size: 2.5em;
+  font-weight: 350;
+}
+
+.page-header small {
+  font-weight: 150;
+}

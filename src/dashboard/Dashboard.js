@@ -50,16 +50,16 @@ class CurrentBalance extends Component {
 class Dashboard extends Component {
   render() {
     return (
-      <div className="dashboard-component">
+      <div className="page">
         <Row>
-          <Col s={12}><h3>Dashboard <small>Lorem Ipsum</small></h3></Col>
-        </Row>
-        
-        <Row>
-          <Col s={12} m={7} l={6} xl={4} offset="m5 l6 xl8">
+          <Col s={12} m={5} l={6} xl={8} className="page-header-col-wrapper">
+            <p className="page-header">Dashboard <small>Lorem ipsum dolor, sit amet</small></p>
+          </Col>
+          <Col s={12} m={7} l={6} xl={4}>
             <CurrentBalance />
           </Col>
         </Row>
+        
       </div>
     );
   }
