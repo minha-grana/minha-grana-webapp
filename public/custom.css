@@ -31,3 +31,7 @@
 .page-header small {
   font-weight: 150;
 }
+
+.page-content {
+  margin-top: 2em;
+}

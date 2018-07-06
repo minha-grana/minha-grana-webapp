@@ -15,9 +15,9 @@ class LeftSideNav extends Component {
 
         <div className="userView">
             <div className="background"><img src="img/sidebar-bg.jpg" alt="" /></div>
-            <a href="#!user"><img className="circle" src="img/avatar-placeholder.png" alt="John Doe" /></a>
-            <a href="#!name"><span className="white-text name">John Doe</span></a>
-            <a href="#!email"><span className="white-text email">jdandturk@gmail.com</span></a>
+            <a><img className="circle" src="img/avatar-placeholder.png" alt="John Doe" /></a>
+            <a><span className="white-text name">John Doe</span></a>
+            <a><span className="white-text email">jdandturk@gmail.com</span></a>
         </div>
         <p>{}</p>
         <li><NavLink className={"waves-effect " + (pathname === "/dashboard" ? "active-route" : "")} to="/dashboard"><Icon>dashboard</Icon>Dashboard</NavLink></li>

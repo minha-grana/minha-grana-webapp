@@ -18,7 +18,7 @@ ReactDOM.render(
                 <Route path="/" exact={true} render={() => <Redirect to="/dashboard" />} />
                 <Route path="/dashboard" component={Dashboard} />
                 <Route path="/timeline" component={Timeline} />
-                <Route path="/accounts" component={Accounts} />
+                <Route path="/accounts" component={Accounts} />                
                 <Route path="/settings" component={Settings} />
                 <Route path="/about" component={About} />
             </PageTemplate>
