@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-import { Row, Col, Input, Button, Icon } from 'react-materialize';
+import { Row, Col, Input, Button, Modal, Icon } from 'react-materialize';
 
 import './AccountEdit.css';
 
 class AccountEdit extends Component {
+
+  confirmDeletion(accountId) {
+    console.log('delete: ' + accountId);
+    this.goBack();
+  }
 
   save() {
     this.goBack();
@@ -46,7 +51,16 @@ class AccountEdit extends Component {
               <Col className="center-align" s={10} m={8} l={6} offset="s1 m2 l3">
                 <Row>
                   <Col s={12}>
-                    <Button onClick={() => this.goBack.bind(this)()} className="red darken-1" waves='light'>Delete account<Icon left>delete</Icon></Button>
+                  <Modal header='Delete Account'
+                      trigger={<Button className="red darken-1" waves='light'>Delete account<Icon left>delete</Icon></Button>}
+                      actions={<div>
+                        <Button className="red darken-2" waves='light' modal="close" onClick={() => this.confirmDeletion.bind(this)(match.params.accountId)}>Remove<Icon left>delete</Icon></Button>
+                        <Button flat modal="close">Cancel</Button>
+                        </div>}>
+                    <p>Removing this account will remove all transactions and references ever made to this account in Minha Grana until now.</p>
+                    <p>Do you want to remove this account anyway?</p>
+                  </Modal>
+                    
                   </Col>
                 </Row>
               </Col>
@@ -54,6 +68,7 @@ class AccountEdit extends Component {
           </Col>
         </Row>
 
+        
       </div>
     );
   }

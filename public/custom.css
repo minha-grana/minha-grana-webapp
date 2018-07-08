@@ -11,6 +11,12 @@
 }
 /* End of fix */
 
+/* This is a fix for react materialize button flat hover background (should be initial) */
+.btn-flat:hover {
+  background-color: initial !important;
+}
+/* End of fix */
+
 
 @media (max-width: 992px) {
   nav .brand-logo {
