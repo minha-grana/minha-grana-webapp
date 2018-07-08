@@ -6,10 +6,8 @@ import './AccountAdd.css';
 class AccountAdd extends Component {
 
   createAccount() {
-    console.log('create');
-    
     // Returned id from account creation (Location header ?)
-    this.props.history.push('/account/edit/123');
+    this.props.history.push('/accounts/edit/123');
   }
 
   render() {
@@ -33,7 +31,7 @@ class AccountAdd extends Component {
               </Col>
             </Row>
           </Col>
-      </Row>
+        </Row>
       </div>
     );
   }
