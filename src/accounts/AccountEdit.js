@@ -10,7 +10,7 @@ class AccountEdit extends Component {
   }
 
   goBack() {
-    this.props.history.push('/accounts')
+    this.props.history.push('/accounts');
   }
 
   render() {
@@ -31,10 +31,10 @@ class AccountEdit extends Component {
               <Input s={12} m={8} label="Account No." disabled defaultValue="0012356-3" icon='account_circle'/>
             </Row>
             <Row>
-              <Col className="input-field center-align" s={10} m={8} l={6} offset="s1 m2 l3">
+              <Col className="center-align" s={10} m={8} l={6} offset="s1 m2 l3">
                 <Row>
                   <Col s={6}>
-                    <Button onClick={() => this.goBack.bind(this)()} className="orange darken-2" waves='light'>Return<Icon left>chevron_left</Icon></Button>
+                    <Button onClick={() => this.goBack.bind(this)()} className="orange ligthen-2" waves='light'>Back<Icon left>chevron_left</Icon></Button>
                   </Col>
                   <Col s={6}>
                     <Button onClick={() => this.save.bind(this)()} waves='light'>Save<Icon left>done</Icon></Button>
@@ -42,8 +42,18 @@ class AccountEdit extends Component {
                 </Row>
               </Col>
             </Row>
+            <Row>
+              <Col className="center-align" s={10} m={8} l={6} offset="s1 m2 l3">
+                <Row>
+                  <Col s={12}>
+                    <Button onClick={() => this.goBack.bind(this)()} className="red darken-1" waves='light'>Delete account<Icon left>delete</Icon></Button>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
           </Col>
         </Row>
+
       </div>
     );
   }

@@ -11,7 +11,6 @@ class AccountsList extends Component {
   }
 
   render() {
-    const { history } = this.props;
     return (
       <div>
         <p className="page-header">Accounts <small>Manage your accounts</small></p>
@@ -73,9 +72,15 @@ class AccountsList extends Component {
           </Col>
         </Row>
       
-        <Button floating fab='vertical' className='red' icon='add' large style={{bottom: '45px', right: '24px'}}>
-          <Button floating icon='account_balance' className='blue darken-1' onClick={()=> history.push('/accounts/add')}/>
-        </Button>
+        <Row>
+          <Col className="center-align" s={10} m={8} l={6} offset="s1 m2 l3">
+            <Row>
+              <Col s={12}>
+                <Button onClick={() => this.props.history.push('/accounts/add')} waves='light'>Add Account<Icon left>add</Icon></Button>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
       </div>
     );
   }
