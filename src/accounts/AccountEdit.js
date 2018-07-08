@@ -31,10 +31,10 @@ class AccountEdit extends Component {
               <Input s={12} m={8} label="Account No." disabled defaultValue="0012356-3" icon='account_circle'/>
             </Row>
             <Row>
-              <Col className="input-field center-align" s={10} m={6} offset="s1 m3">
+              <Col className="input-field center-align" s={10} m={8} l={6} offset="s1 m2 l3">
                 <Row>
                   <Col s={6}>
-                    <Button onClick={() => this.goBack.bind(this)()} className="orange darken-2" waves='light'>Go back<Icon left>chevron_left</Icon></Button>
+                    <Button onClick={() => this.goBack.bind(this)()} className="orange darken-2" waves='light'>Return<Icon left>chevron_left</Icon></Button>
                   </Col>
                   <Col s={6}>
                     <Button onClick={() => this.save.bind(this)()} waves='light'>Save<Icon left>done</Icon></Button>

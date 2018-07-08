@@ -1,0 +1,42 @@
+.bank-card .card-image {
+    text-align: center;
+    padding-top: 3.5em;
+    width: 20%;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.bank-card .card-image i {
+    color: rgba(0, 0, 0, 0.3);
+    font-size: 4em;
+}
+
+.bank-card .card-content {
+    margin-right: 60px;
+}
+
+.bank-card .card-content .col:nth-child(1) {
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.bank-card .card-content .col:nth-child(2) {
+    font-weight: 400;
+}
+
+.bank-card .edit-bank-action {
+    color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    right: 0;
+    height: 100%;
+    padding-top: 4em;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.bank-card .edit-bank-action:hover {
+    color: rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+}
+
+.bank-card .edit-bank-action i {
+    font-size: 4em; 
+}
