@@ -62,11 +62,11 @@
 
 
 /* Empty day cell rules */
-.month-calendar .calendar-body .col.empty-day:hover {
+.month-calendar .calendar-body .col.empty-cell:hover {
   cursor: initial;
   background-color: initial;
 }
-.month-calendar .calendar-body .col.empty-day {
+.month-calendar .calendar-body .col.empty-cell {
   background-color: initial
 }
 

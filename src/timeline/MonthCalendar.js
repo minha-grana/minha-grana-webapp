@@ -3,6 +3,7 @@ import { Row, Col, Button, Icon } from 'react-materialize';
 import DatePicker from 'rc-calendar/lib/Picker';
 import RCMonthCalendar from 'rc-calendar/lib/MonthCalendar';
 import moment from 'moment';
+import shortid from 'shortid';
 
 import 'rc-calendar/assets/index.css';
 import './MonthCalendar.css';
@@ -31,8 +32,8 @@ class MonthCalendar extends Component {
 
   setCurrentMonth(value) {
     this.setState({
-      currentMonth: value.startOf('month')
-    })
+      currentMonth: value.clone().startOf('month')
+    });
   }
 
   renderNavigator() {
@@ -55,62 +56,93 @@ class MonthCalendar extends Component {
     );
   }
 
-  days() {
-    const { currentMonth, currentDate } = this.state;
-    const days = [];
+  isCurrentDay(compareDate) {
+    const { currentDate } = this.state;
+    return compareDate.diff(currentDate, 'year') === 0 &&
+           compareDate.diff(currentDate, 'month') === 0 &&
+           compareDate.diff(currentDate, 'day') === 0;
+  }
 
-    for (let i = 0; i < currentMonth.clone().startOf('month').day(); i++) {
-      days.push(<Col className="empty-day" key={'empty_' + i}>&nbsp;</Col>);
+  renderCell(dayNo) {
+    const { currentMonth } = this.state;
+
+    if (dayNo) {
+      return (
+      <Col key={shortid.generate()} className={this.isCurrentDay(currentMonth.clone().add(dayNo - 1, 'd')) ? 'current-day': ''}>
+        <span className="day-no">{dayNo}</span>
+        &nbsp;
+      </Col>
+      );
+    } else {
+      return (<Col className="empty-cell" key={shortid.generate()}>&nbsp;</Col>);
+    }
+  }
+
+  getMonthCalendarCells() {
+    const { currentMonth } = this.state;
+    const daysBehindToCompleteWeek = currentMonth.clone().startOf('month').day();
+    const daysInCurrentMonth = currentMonth.clone().endOf('month').date();
+
+    const currentMonthCalendarCells = [];
+
+    for (let i = 0; i < daysBehindToCompleteWeek; i++) {
+      currentMonthCalendarCells.push(this.renderCell());
     }
 
-    for (let i = 1; i <= currentMonth.clone().endOf('month').date(); i++) {
-      days.push(<Col key={i} className={
-        (currentMonth.diff(currentDate, 'year') === 0 &&
-          currentMonth.diff(currentDate, 'month') === 0 &&
-          currentMonth.clone().add(i - 1, 'd').diff(currentDate, 'day') === 0) ? 'current-day': ''}>
-          <span className="day-no">{i}</span>&nbsp;</Col>);
+    for (let i = 1; i <= daysInCurrentMonth; i++) {
+      currentMonthCalendarCells.push(this.renderCell(i));
     }
 
-    const weeks = []
-    let week = [];
-    for (let i = 0; i < days.length; i++) {
-      week.push(days[i]);
-      if (week.length > 6) {
-        weeks.push(<Row key={"week_" + i}>{week}</Row>);
-        week = [];
+    return currentMonthCalendarCells;
+  }
+
+  getMonthCalendarRows() {
+    const cells = this.getMonthCalendarCells();
+    const monthCalendarRows = [];
+
+    let currentRow = [];
+    for (let i = 0; i < cells.length; i++) {
+      if (currentRow.length === 7) {
+        monthCalendarRows.push(currentRow);
+        currentRow = [];
       }
-    }
-    for (let i = week.length; i > 0 && i < 7; i++) {
-      week.push(<Col className="empty-day" key={'empty_end_of_month_' + i}>&nbsp;</Col>)
-    }
-    weeks.push(week);
 
-    const header = (<Row className="calendar-header">
-      {moment.weekdays().map(day => (<Col key={day}>{day}</Col>))}
-    </Row>);
+      currentRow.push(cells[i]);
+    }
 
+    for (let i = currentRow.length; i < 7; i++) {
+      currentRow.push(this.renderCell());
+    }
+    monthCalendarRows.push(currentRow);
+
+    return monthCalendarRows;
+  }
+
+  renderMonthCalendarBody() {
     return (
-      <Row>
-        <Col s={12}>
-          <div className="month-calendar">
-            {header}
-            <div className="calendar-body">
-              {weeks}
-            </div>
-          </div>
-        </Col>
+      <Row className="calendar-body">
+        {this.getMonthCalendarRows()}
+      </Row>
+    );
+  }
+
+  renderMonthCalendarHeader() {
+    return (
+      <Row className="calendar-header">
+        {moment.weekdays().map(day => (<Col key={shortid.generate()}>{day}</Col>))}
       </Row>
     );
   }
 
   renderMonthCalendar() {
-    return this.days();
-
-    const { currentMonth, currentDate } = this.state;
-    const daysBehindToCompleteWeek = currentMonth.clone().startOf('month').day();
-    const daysInCurrentMonth = currentMonth.clone().endOf('month').date();
-
-
+    return (
+      <Row>
+        <Col s={12} className="month-calendar">
+          {this.renderMonthCalendarHeader()}
+          {this.renderMonthCalendarBody()}
+        </Col>
+      </Row>
+    );
   }
 
   render() {
