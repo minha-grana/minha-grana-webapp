@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { Row, Col, Button } from 'react-materialize';
+import DatePicker from 'rc-calendar/lib/Picker';
+import MonthCalendar from 'rc-calendar/lib/MonthCalendar';
+import 'rc-calendar/assets/index.css';
+
 import moment from 'moment';
 
 import './Timeline.css';
 
-class Calendar extends Component {
+class TimelineCalendar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,18 +26,12 @@ class Calendar extends Component {
       days.push(<Col className="empty-day" key={'empty_' + i}>&nbsp;</Col>);
     }
 
-
     for (let i = 1; i <= currentMonth.clone().endOf('month').date(); i++) {
-
-      console.log(currentMonth.diff(currentDate, 'year') === 0);
-      console.log(currentMonth.diff(currentDate, 'month') === 0);
-      console.log(currentMonth.diff(currentDate, 'day') === 0);
-      console.log(currentMonth.clone().add(i - 1, 'd').diff(currentDate, 'day'));
-      
       days.push(<Col key={i} className={
         (currentMonth.diff(currentDate, 'year') === 0 &&
          currentMonth.diff(currentDate, 'month') === 0 &&
-          currentMonth.clone().add(i - 1, 'd').diff(currentDate, 'day') === 0) ? 'current-day': ''}><span className="day-no">{i}</span>&nbsp;</Col>);
+          currentMonth.clone().add(i - 1, 'd').diff(currentDate, 'day') === 0) ? 'current-day': ''}>
+          <span className="day-no">{i}</span>&nbsp;</Col>);
     }
 
     const weeks = []
@@ -51,13 +49,7 @@ class Calendar extends Component {
     weeks.push(week);
 
     const header = (<Row className="calendar-header">
-      <Col>{moment().add(0, 'd').format('dddd')}</Col>
-      <Col>{moment().add(1, 'd').format('dddd')}</Col>
-      <Col>{moment().add(2, 'd').format('dddd')}</Col>
-      <Col>{moment().add(3, 'd').format('dddd')}</Col>
-      <Col>{moment().add(4, 'd').format('dddd')}</Col>
-      <Col>{moment().add(5, 'd').format('dddd')}</Col>
-      <Col>{moment().add(6, 'd').format('dddd')}</Col>
+      {moment.weekdays().map(day => (<Col key={day}>{day}</Col>))}
     </Row>);
     
     return (
@@ -81,13 +73,25 @@ class Calendar extends Component {
     });
   }
 
+  setCurrentMonth(value) {
+    this.setState({
+      currentMonth: value.startOf('month')
+    })
+  }
+
   renderNavigator() {
+    const calendar = (<MonthCalendar />);
     return (
       <Row>
-        <Col s={12} className="center-align">
+        <Col s={12} className="center-align" style={{lineHeight: "1.4em"}}>
           <Button flat onClick={() => this.navigateBack()}>&lt;</Button>
 
-          {this.state.currentMonth.format('MMMM, YYYY')}
+          <DatePicker calendar={calendar} 
+                      value={this.state.currentMonth} 
+                      onChange={this.setCurrentMonth.bind(this)}
+                      mode="month">
+            {({ value }) => (<span className="date-picker-value">{value && value.format('MMMM, YYYY')}</span>)}
+          </DatePicker>
 
           <Button flat onClick={() => this.navigateForward()}>&gt;</Button>
 
@@ -118,7 +122,7 @@ class Timeline extends Component {
     return (
       <div className="page">
         <p className="page-header">Timeline <small>Your money flow between days</small></p>
-        <Calendar />
+        <TimelineCalendar />
       </div>
     );
   }
