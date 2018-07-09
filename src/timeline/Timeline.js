@@ -1,21 +1,39 @@
 import React, { Component } from 'react';
-import { Row, Col, Icon, Button, Dropdown, NavItem } from 'react-materialize';
+import { Row, Col, Button } from 'react-materialize';
 import moment from 'moment';
-
-import CurrentBalance from '../common/current-balance/CurrentBalance';
 
 import './Timeline.css';
 
-class Timeline extends Component {
+class Calendar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      view: "month",
+      currentDate: moment().startOf('day'),
+      currentMonth: moment().startOf('month')
+    }
+  }
 
   days() {
+    const { currentMonth, currentDate } = this.state;
     const days = [];
     
-    for (let i = 0; i < moment()/*.add(1, 'month')*/.startOf('month').day(); i++) {
+    for (let i = 0; i < currentMonth.clone().startOf('month').day(); i++) {
       days.push(<Col className="empty-day" key={'empty_' + i}>&nbsp;</Col>);
     }
-    for (let i = 1; i <= moment()/*.add(1, 'month')*/.endOf('month').date(); i++) {
-      days.push(<Col key={i}><span className="day-no">{i}</span>&nbsp;</Col>);
+
+
+    for (let i = 1; i <= currentMonth.clone().endOf('month').date(); i++) {
+
+      console.log(currentMonth.diff(currentDate, 'year') === 0);
+      console.log(currentMonth.diff(currentDate, 'month') === 0);
+      console.log(currentMonth.diff(currentDate, 'day') === 0);
+      console.log(currentMonth.clone().add(i - 1, 'd').diff(currentDate, 'day'));
+      
+      days.push(<Col key={i} className={
+        (currentMonth.diff(currentDate, 'year') === 0 &&
+         currentMonth.diff(currentDate, 'month') === 0 &&
+          currentMonth.clone().add(i - 1, 'd').diff(currentDate, 'day') === 0) ? 'current-day': ''}><span className="day-no">{i}</span>&nbsp;</Col>);
     }
 
     const weeks = []
@@ -27,7 +45,7 @@ class Timeline extends Component {
         week = [];
       }
     }
-    for (let i = week.length; i < 7; i++) {
+    for (let i = week.length; i > 0 && i < 7; i++) {
       week.push(<Col className="empty-day" key={'empty_end_of_month_' + i}>&nbsp;</Col>)
     }
     weeks.push(week);
@@ -43,26 +61,64 @@ class Timeline extends Component {
     </Row>);
     
     return (
-    <div className="timeline-calendar">
-      {header}
-      <div className="calendar-body">
-        {weeks}
-      </div>
-    </div>);
+      <div className="timeline-calendar">
+        {header}
+        <div className="calendar-body">
+          {weeks}
+        </div>
+      </div>);
   }
-  
+
+  navigateBack() {
+    this.setState({
+      currentMonth: this.state.currentMonth.clone().subtract(1, 'month')
+    });
+  }
+
+  navigateForward() {
+    this.setState({
+      currentMonth: this.state.currentMonth.clone().add(1, 'month')
+    });
+  }
+
+  renderNavigator() {
+    return (
+      <Row>
+        <Col s={12} className="center-align">
+          <Button flat onClick={() => this.navigateBack()}>&lt;</Button>
+
+          {this.state.currentMonth.format('MMMM, YYYY')}
+
+          <Button flat onClick={() => this.navigateForward()}>&gt;</Button>
+
+        </Col>
+      </Row>
+    )
+  }
+
   render() {
     return (
-      <div className="page">
-        <p className="page-header">Timeline <small>Your money flow between days</small></p>
-        <br/>
-        <br/>
-        <br/>
+      <div>
+        {this.renderNavigator()}
         <Row>
           <Col s={12}>
             {this.days()}
           </Col>
         </Row>
+      </div>
+    );
+  }
+}
+
+class Timeline extends Component {
+
+  
+  
+  render() {
+    return (
+      <div className="page">
+        <p className="page-header">Timeline <small>Your money flow between days</small></p>
+        <Calendar />
       </div>
     );
   }

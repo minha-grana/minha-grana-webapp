@@ -20,8 +20,27 @@
 .timeline-calendar .calendar-body .col {
   line-height: 4em;
   padding: 1em;
-  margin-bottom: 1px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.timeline-calendar .calendar-body .col.current-day {
+  background-color: rgba(0, 100, 0, 0.1);
+}
+
+.timeline-calendar .calendar-body .col.current-day .day-no {
+  opacity: 1;
+}
+
+.timeline-calendar .calendar-body .col.current-day::after {
+  content: "Today";
+  float: right;
+  line-height: 0;
+  margin-right: -3em;
+  font-weight: 100;
+}
+
+.timeline-calendar .calendar-body .col.current-day:hover {
+  background-color: rgba(0, 100, 0, 0.2);
 }
 
 .timeline-calendar .calendar-body .col:hover {
@@ -49,5 +68,5 @@
   text-align: center;
   opacity: 0.4;
   font-size: 2em;
-  font-weight: 100;
+  font-weight: 200;
 }
