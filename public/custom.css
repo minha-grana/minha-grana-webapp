@@ -17,6 +17,9 @@
 }
 /* End of fix */
 
+.page-header-col-wrapper {
+  padding-left: 0 !important;
+}
 
 @media (max-width: 992px) {
   nav .brand-logo {

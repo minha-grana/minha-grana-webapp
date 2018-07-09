@@ -1,0 +1,53 @@
+.timeline-calendar .calendar-header .col {
+  line-height: 3em;
+  font-size: 1.5em;
+  font-weight: 300;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.timeline-calendar .row {
+  margin-bottom: 0;
+}
+
+.timeline-calendar .col {
+  width: 14.2855555%;
+  margin-left: auto;
+  left: auto;
+  right: auto;
+}
+
+.timeline-calendar .calendar-body .col {
+  line-height: 4em;
+  padding: 1em;
+  margin-bottom: 1px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.timeline-calendar .calendar-body .col:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.timeline-calendar .calendar-body .col.empty-day:hover {
+  cursor: initial;
+  background-color: initial;
+}
+
+.timeline-calendar .calendar-body .col:hover .day-no {
+  opacity: 1;
+}
+
+.timeline-calendar .calendar-body .col.empty-day {
+  background-color: initial  
+}
+
+.timeline-calendar .calendar-body .col .day-no {
+  float: right;
+  width: 1.5em;
+  height: 1.5em;
+  text-align: center;
+  opacity: 0.4;
+  font-size: 2em;
+  font-weight: 100;
+}

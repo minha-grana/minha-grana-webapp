@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "jquery": "^3.3.1",
+    "moment": "^2.22.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-materialize": "^2.3.3",
+    "react-moment": "^0.7.9",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4"
   },
@@ -14,6 +16,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-to-ghpages": "react-scripts build && cp -r build/* ../minha-grana.github.io/ && cd ../minha-grana.github.io && git add . && git commit -m \"App build $(date --rfc-3339=seconds)\" && git push"
   }
 }
