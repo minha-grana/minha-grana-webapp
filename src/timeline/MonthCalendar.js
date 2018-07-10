@@ -88,7 +88,7 @@ class MonthCalendar extends Component {
       </Col>
       );
     } else {
-      return (<Col className="empty-cell" key={shortid.generate()}><div className="cell-container"></div></Col>);
+      return (<Col className="day-cell empty-cell" key={shortid.generate()}><div className="cell-container"></div></Col>);
     }
   }
 
