@@ -65,16 +65,30 @@ class MonthCalendar extends Component {
 
   renderCell(dayNo) {
     const { currentMonth } = this.state;
+    const isCurrentDay = this.isCurrentDay(currentMonth.clone().add(dayNo - 1, 'd'));
 
     if (dayNo) {
       return (
-      <Col key={shortid.generate()} className={this.isCurrentDay(currentMonth.clone().add(dayNo - 1, 'd')) ? 'current-day': ''}>
+      <Col key={shortid.generate()} className={(isCurrentDay ? 'current-day': '') + " day-cell"}>
         <span className="day-no">{dayNo}</span>
-        &nbsp;
+        <div className="cell-header">
+          {isCurrentDay && <span>Today</span>}
+        </div>
+
+        <Row className="cell-container">
+          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color"></i>-139,99</Col>}
+          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color"></i>-1.139,99</Col>}
+          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color"></i>-9,99</Col>}
+          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color"></i>-12.139,99</Col>}
+          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color"></i>-139,99</Col>}
+          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color"></i>-139,99</Col>}
+          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color"></i>-9,99</Col>}
+          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color"></i>-39,99</Col>}
+        </Row>
       </Col>
       );
     } else {
-      return (<Col className="empty-cell" key={shortid.generate()}>&nbsp;</Col>);
+      return (<Col className="empty-cell" key={shortid.generate()}><div className="cell-container"></div></Col>);
     }
   }
 
@@ -120,9 +134,9 @@ class MonthCalendar extends Component {
 
   renderMonthCalendarBody() {
     return (
-      <Row className="calendar-body">
-        {this.getMonthCalendarRows()}
-      </Row>
+      <div className="calendar-body">
+        {this.getMonthCalendarRows().map(cells => <Row key={shortid.generate()}>{cells}</Row>)}
+      </div>
     );
   }
 

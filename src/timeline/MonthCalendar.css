@@ -15,7 +15,8 @@
 .month-calendar .row {
   margin-bottom: 0;
 }
-.month-calendar .col {
+.month-calendar .calendar-header .col,
+.month-calendar .calendar-body .day-cell {
   width: 14.2855555%;
   margin-left: auto;
   left: auto;
@@ -34,53 +35,61 @@
 
 
 /* Month calendar Body rules */
-.month-calendar .calendar-body .col {
-  line-height: 4em;
-  padding: 1em;
+.month-calendar .calendar-body .day-cell {
+  min-height: 6em;
+  max-height: 6em;
+  padding: 0;
+  overflow: hidden;
 }
-.month-calendar .calendar-body .col:hover {
+.month-calendar .calendar-body .day-cell:hover {
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.03);
 }
 
 
-/* Current day rules */
-.month-calendar .calendar-body .col.current-day {
-  background-color: rgba(0, 100, 0, 0.1);
-}
-.month-calendar .calendar-body .col.current-day:hover {
-  background-color: rgba(0, 100, 0, 0.2);
-}
-.month-calendar .calendar-body .col.current-day::after {
-  content: "Today";
-  float: right;
-  line-height: 0;
-  margin-right: -1em;
+/* Cell header rules */
+.month-calendar .calendar-body .day-cell .cell-header {
+  width: 100%;
+  min-height: 1.1em;
+  text-align: right;
+  display: block;
+  line-height: 1em;
+  padding: 1px;
   font-weight: 100;
   font-size: 0.9em;
 }
 
 
+/* Current day rules */
+.month-calendar .calendar-body .day-cell.current-day {
+  background-color: rgba(0, 100, 0, 0.1);
+}
+.month-calendar .calendar-body .day-cell.current-day:hover {
+  background-color: rgba(0, 100, 0, 0.2);
+}
+
+
 /* Empty day cell rules */
-.month-calendar .calendar-body .col.empty-cell:hover {
+.month-calendar .calendar-body .day-cell.empty-cell:hover {
   cursor: initial;
   background-color: initial;
 }
-.month-calendar .calendar-body .col.empty-cell {
+.month-calendar .calendar-body .day-cell.empty-cell {
   background-color: initial
 }
 
 
 /* Day number rules */
-.month-calendar .calendar-body .col .day-no {
+.month-calendar .calendar-body .day-cell .day-no {
   float: right;
   text-align: center;
   opacity: 0.4;
   font-size: 2em;
   font-weight: 200;
-  margin-right: -0.3em;
+  margin: 0 3px 0 5px;
+  min-width: 1.1em;
 }
-.month-calendar .calendar-body .col:hover .day-no {
+.month-calendar .calendar-body .day-cell:hover .day-no {
   opacity: 1;
 }
 
@@ -96,16 +105,75 @@
   .month-calendar .calendar-header .col {
     font-size: 1em;
   }
-  .month-calendar .calendar-body .col {
-    padding: 0.8em;
+
+  .month-calendar .calendar-body .day-cell {
+    min-height: 5em;
+    max-height: 5em;
   }
 
-  .month-calendar .calendar-body .col .day-no {
+  .month-calendar .calendar-body .day-cell .cell-container {
+    max-height: 3.9em !important;
+  }
+
+  .month-calendar .calendar-body .day-cell .cell-container::-webkit-scrollbar {
+    width: 0.3em !important;
+  }
+
+  .month-calendar .calendar-body .day-cell .day-no {
     font-size: 1.5em;
     opacity: 0.6;
   }
 
-  .month-calendar .calendar-body .col.current-day::after {
+  .month-calendar .calendar-body .day-cell.current-day .today-marker {
     font-size: 0.75em;
   }
+}
+
+/* Cell container rules */
+.month-calendar .calendar-body .day-cell .cell-container {
+  margin: 1px auto 2px 2px;
+  max-height: 4.8em;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+
+/* Cell container scroll bar customizations */
+.month-calendar .calendar-body .day-cell .cell-container::-webkit-scrollbar {
+  width: 0.4em;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.month-calendar .calendar-body .day-cell .cell-container::-webkit-scrollbar-thumb {
+  width: 0.3em;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+
+/* Cell container values rules */
+.month-calendar .calendar-body .day-cell .cell-container .cell-value {
+  width: 100%;
+  font-size: 0.8em;
+  font-weight: 300;
+  padding: 0 0.4em !important;
+  margin-bottom: 1px;
+  border-radius: 1em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: left;
+}
+.month-calendar .calendar-body .day-cell .cell-container .cell-value:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  font-weight: 400;
+}
+
+/* Cell container values account flag */
+.month-calendar .calendar-body .day-cell .cell-container .cell-value .account-color {
+  float: left;
+  width: 0.75em;
+  height: 0.75em;
+  background-color: rgba(150, 150, 250, 1);
+  margin-top: 0.35em;
+  margin-right: 10%;
+  border-radius: 50%;
 }
