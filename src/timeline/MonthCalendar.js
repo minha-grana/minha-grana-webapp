@@ -72,18 +72,21 @@ class MonthCalendar extends Component {
       <Col key={shortid.generate()} className={(isCurrentDay ? 'current-day': '') + " day-cell"}>
         <span className="day-no">{dayNo}</span>
         <div className="cell-header">
-          {isCurrentDay && <span>Today</span>}
+          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <div className="daily-transactions-summary">
+            <span className="credit-summary"><Icon>call_received</Icon>1.234,45</span>
+            <span className="debit-summary"><Icon>call_made</Icon>-344.70</span>
+          </div>}
         </div>
 
         <Row className="cell-container">
-          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color"></i>-139,99</Col>}
-          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color"></i>-1.139,99</Col>}
-          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color"></i>-9,99</Col>}
-          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color"></i>-12.139,99</Col>}
-          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color"></i>-139,99</Col>}
-          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color"></i>-139,99</Col>}
-          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color"></i>-9,99</Col>}
-          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color"></i>-39,99</Col>}
+          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color blue-1"></i>Aluguel</Col>}
+          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color green-1"></i>Condominio</Col>}
+          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color yellow-1"></i>Energia</Col>}
+          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color red-1"></i>Internet</Col>}
+          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color purple-1"></i>Celular</Col>}
+          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color gray-1"></i>Ração de cachorro</Col>}
+          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color blue-1"></i>Presente de fulana</Col>}
+          {(isCurrentDay || Math.floor(Math.random() * 1000) < 150) && <Col className="cell-value"><i className="account-color blue-1"></i>Rolezinho</Col>}
         </Row>
       </Col>
       );

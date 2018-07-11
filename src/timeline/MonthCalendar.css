@@ -50,13 +50,37 @@
 /* Cell header rules */
 .month-calendar .calendar-body .day-cell .cell-header {
   width: 100%;
-  min-height: 1.1em;
-  text-align: right;
+  height: 1.1em;
   display: block;
-  line-height: 1em;
   padding: 1px;
   font-weight: 100;
   font-size: 0.9em;
+}
+
+.month-calendar .calendar-body .day-cell .cell-header .daily-transactions-summary {
+  font-weight: 300;
+  font-size: 0.8em;
+  line-height: 1.3em;
+  text-align: center;
+}
+.month-calendar .calendar-body .day-cell .cell-header .daily-transactions-summary:hover {
+  font-weight: 400;
+}
+
+.month-calendar .calendar-body .day-cell .cell-header .daily-transactions-summary span {
+  margin-left: 5px;
+}
+
+.month-calendar .calendar-body .day-cell .cell-header .daily-transactions-summary .credit-summary {
+  color: rgb(0, 100, 0);
+}
+.month-calendar .calendar-body .day-cell .cell-header .daily-transactions-summary .debit-summary {
+  color: rgb(100, 0, 0);
+}
+
+.month-calendar .calendar-body .day-cell .cell-header .daily-transactions-summary i {
+  font-size: 0.8em;
+  margin-right: 1px;
 }
 
 
@@ -81,6 +105,7 @@
 
 /* Day number rules */
 .month-calendar .calendar-body .day-cell .day-no {
+  display: grid;
   float: right;
   text-align: center;
   opacity: 0.4;
@@ -91,6 +116,13 @@
 }
 .month-calendar .calendar-body .day-cell:hover .day-no {
   opacity: 1;
+}
+
+.month-calendar .calendar-body .day-cell.current-day .day-no::after {
+  content: 'Today';
+  font-size: 0.4em;
+  font-weight: 300;
+  margin-top: -0.8em;
 }
 
 
@@ -123,16 +155,12 @@
     font-size: 1.5em;
     opacity: 0.6;
   }
-
-  .month-calendar .calendar-body .day-cell.current-day .today-marker {
-    font-size: 0.75em;
-  }
 }
 
 /* Cell container rules */
 .month-calendar .calendar-body .day-cell .cell-container {
-  margin: 1px auto 2px 2px;
-  max-height: 4.8em;
+  margin: 1px auto 0 0;
+  max-height: 4.9em;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -156,7 +184,6 @@
   font-weight: 300;
   padding: 0 0.4em !important;
   margin-bottom: 1px;
-  border-radius: 1em;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -172,8 +199,33 @@
   float: left;
   width: 0.75em;
   height: 0.75em;
-  background-color: rgba(150, 150, 250, 1);
   margin-top: 0.35em;
-  margin-right: 10%;
+  margin-left: 0.3em;
+  margin-right: 0.5em;
   border-radius: 50%;
+}
+
+
+
+
+
+
+/* Account color rules (to be exported somewhere else) */
+.account-color.blue-1 {
+  background-color: rgba(80, 80, 250, 0.5);
+}
+.account-color.green-1 {
+  background-color: rgba(100, 150, 100, 0.5);
+}
+.account-color.yellow-1 {
+  background-color: rgba(0, 200, 100, 0.5);
+}
+.account-color.red-1 {
+  background-color: rgba(250, 100, 100, 0.5);
+}
+.account-color.purple-1 {
+  background-color: rgba(150, 150, 250, 0.5);
+}
+.account-color.gray-1 {
+  background-color: rgba(150, 150, 150, 0.5);
 }
