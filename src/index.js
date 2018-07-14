@@ -14,10 +14,12 @@ import Accounts from './accounts/Accounts';
 import Settings from './settings/Settings';
 import About from './about/About';
 
+let isLoggedIn = false;
 const loggedIn = (authResult, error) => {
   if (error) {
     console.error(error);
   } else {
+    isLoggedIn = true;
     console.log(authResult);
     window.history.go(window.location.origin);
   }
@@ -33,10 +35,9 @@ const handleAuthentication = ({location}) => {
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route path="/" exact={true} render={(props) => <Home auth={auth}/>} />
-      <Route path="/callback" render={(props) => {
+      <Route path="/" exact={true} render={(props) => {
           handleAuthentication(props);
-          return auth.isAuthenticated() ? <Redirect to="/dashboard" /> : <div>Loading...</div>;
+          return auth.isAuthenticated() ? <Redirect to="/dashboard" /> : <Home auth={auth} loading={isLoggedIn} />;
         }}/>
       {auth.isAuthenticated() &&
         <PageTemplate auth={auth}>
