@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { Navbar, Icon } from 'react-materialize';
-import { NavLink } from 'react-router-dom';
+import { Navbar, Icon, Button } from 'react-materialize';
+
 import './TopNavBar.css';
 
 class TopNavBar extends Component {
   render() {
+    const { auth } = this.props;
     return (
       <Navbar right brand={<div data-activates="side-nav"><Icon style={{margin: "0 15px"}}>menu</Icon></div>}>
-         <NavLink to="/settings"><Icon>settings</Icon></NavLink>
+         <Button onClick={() => auth.logout()}>Logout</Button>
       </Navbar>
     );
   }

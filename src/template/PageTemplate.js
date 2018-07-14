@@ -7,12 +7,12 @@ class PageTemplate extends Component {
     render() {
       return (
         <div>
-            <TopNavBar />
-            <LeftSideNav />
+            <TopNavBar {...this.props} />
+            <LeftSideNav {...this.props} />
             {this.props.children}
         </div>
       );
     }
   }
-  
+
   export default PageTemplate;

@@ -4,26 +4,51 @@ import registerServiceWorker from './registerServiceWorker';
 
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
+import Auth from './auth/Auth';
+
 import PageTemplate from './template/PageTemplate';
+import Home from './home/Home';
 import Dashboard from './dashboard/Dashboard';
 import Timeline from './timeline/Timeline';
 import Accounts from './accounts/Accounts';
 import Settings from './settings/Settings';
 import About from './about/About';
 
+const loggedIn = (authResult, error) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log(authResult);
+    window.history.go(window.location.origin);
+  }
+};
+
+const auth = new Auth(loggedIn);
+const handleAuthentication = ({location}) => {
+  if (/access_token|id_token|error/.test(location.hash)) {
+    auth.handleAuthentication();
+  }
+}
+
 ReactDOM.render(
-    <BrowserRouter>
-        <Switch>
-            <PageTemplate>
-                <Route path="/" exact={true} render={() => <Redirect to="/dashboard" />} />
-                <Route path="/dashboard" component={Dashboard} />
-                <Route path="/timeline" component={Timeline} />
-                <Route path="/accounts" component={Accounts} />                
-                <Route path="/settings" component={Settings} />
-                <Route path="/about" component={About} />
-            </PageTemplate>
-        </Switch>
-    </BrowserRouter>, 
-    document.getElementById('root'));
+  <BrowserRouter>
+    <Switch>
+      <Route path="/" exact={true} render={(props) => <Home auth={auth}/>} />
+      <Route path="/callback" render={(props) => {
+          handleAuthentication(props);
+          return auth.isAuthenticated() ? <Redirect to="/dashboard" /> : <div>Loading...</div>;
+        }}/>
+      {auth.isAuthenticated() &&
+        <PageTemplate auth={auth}>
+          <Route path="/dashboard" render={(props) => <Dashboard auth={auth} {...props} />}/>
+          <Route path="/timeline" render={(props) => <Timeline auth={auth} {...props} />}/>
+          <Route path="/accounts" render={(props) => <Accounts auth={auth} {...props} />}/>
+          <Route path="/settings" render={(props) => <Settings auth={auth} {...props} />}/>
+          <Route path="/about" render={(props) => <About auth={auth} {...props} />}/>
+        </PageTemplate>}
+      <Route render={(props) => <Redirect to ="/"/>} />
+    </Switch>
+  </BrowserRouter>,
+  document.getElementById('root'));
 registerServiceWorker();
 
